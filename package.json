@@ -7,7 +7,7 @@
   "author": "Ndekocode",
   "main": "index.js",
   "workspaces": [
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
     "dev": "lerna run dev --parallel",
