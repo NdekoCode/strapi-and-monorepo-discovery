@@ -67,6 +67,12 @@
       "relation": "oneToMany",
       "target": "api::review.review",
       "mappedBy": "film"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "films"
     }
   }
 }

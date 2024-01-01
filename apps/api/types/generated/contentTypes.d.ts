@@ -362,6 +362,52 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 255;
+      }>;
+    description: Attribute.Text &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 5;
+      }>;
+    films: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::film.film'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFilmFilm extends Schema.CollectionType {
   collectionName: 'films';
   info: {
@@ -423,6 +469,11 @@ export interface ApiFilmFilm extends Schema.CollectionType {
       'api::film.film',
       'oneToMany',
       'api::review.review'
+    >;
+    categories: Attribute.Relation<
+      'api::film.film',
+      'manyToMany',
+      'api::category.category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -832,6 +883,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::category.category': ApiCategoryCategory;
       'api::film.film': ApiFilmFilm;
       'api::review.review': ApiReviewReview;
       'plugin::upload.file': PluginUploadFile;
