@@ -1,9 +1,9 @@
-import Image from 'next/image'
+import { PageContent } from "@/components";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between p-24">
-      
-    </main>
-  )
+    <PageContent>
+      <h1 className="text-3xl font-bold text-gray-800 my-2">Hello</h1>
+    </PageContent>
+  );
 }

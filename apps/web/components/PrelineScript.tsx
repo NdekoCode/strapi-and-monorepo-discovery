@@ -1,7 +1,17 @@
 "use client";
+
 import { usePathname } from "next/navigation";
-import { HSOverlay } from "preline";
 import { useEffect } from "react";
+
+declare global {
+  interface HSStaticMethods {
+    autoInit(): void;
+  }
+  interface Window {
+    HSStaticMethods: HSStaticMethods;
+  }
+}
+
 export default function PrelineScript() {
   const path = usePathname();
 
@@ -11,9 +21,9 @@ export default function PrelineScript() {
 
   useEffect(() => {
     setTimeout(() => {
-      HSOverlay.autoInit();
+      window.HSStaticMethods.autoInit();
     }, 100);
   }, [path]);
+
   return null;
 }
-

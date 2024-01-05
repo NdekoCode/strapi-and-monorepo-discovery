@@ -1,6 +1,4 @@
-import React from 'react'
-
-const LoadingSpinner = () => {
+export const LoadingSpinner = () => {
   return (
     <div className="min-h-screen w-full h-full flex flex-col">
       <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
@@ -16,6 +14,4 @@ const LoadingSpinner = () => {
       </div>
     </div>
   );
-}
-
-export default LoadingSpinner
+};

@@ -23,7 +23,11 @@ export const fetcher = async(
 ) => {
   let response;
   if (!options) {
-    response = await fetch(url);
+    response = await fetch(url,{
+      next:{
+        revalidate:60*60*24
+      }
+    });
   } else {
     response = await fetch(url, options);
   }

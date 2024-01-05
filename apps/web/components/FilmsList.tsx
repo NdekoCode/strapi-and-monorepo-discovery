@@ -1,8 +1,9 @@
-import { IFilm } from "@/utils/types";
+import { NextPage } from "next";
 import Link from "next/link";
-import { FC } from "react";
 
-const FilmsList: FC<{ filmsData: IFilm[] }> = ({ filmsData }) => {
+import { IFilm } from "@/utils/types";
+
+export const FilmsList: NextPage<{ filmsData: IFilm[] }> = ({ filmsData }) => {
   return filmsData.map((d, index) => (
     <div
       key={index}
@@ -36,5 +37,3 @@ const FilmsList: FC<{ filmsData: IFilm[] }> = ({ filmsData }) => {
     </div>
   ));
 };
-
-export default FilmsList;

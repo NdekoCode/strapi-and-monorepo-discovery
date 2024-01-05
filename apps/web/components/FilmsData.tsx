@@ -1,13 +1,13 @@
-'use client';
-import { fetcher, getStrapiUrl } from "@/utils/libs/api";
-import { IFilm } from "@/utils/types";
+"use client";
 import { useState } from "react";
 import useSWR from "swr";
-import LoadingSpinner from "./LoadingSpinner";
-import FilmsList from "./FilmsList";
-import NoData from "./NoData";
 
-const Films = () => {
+import { fetcher, getStrapiUrl } from "@/utils/libs/api";
+import { IFilm } from "@/utils/types";
+
+import { FilmsList, LoadingSpinner, NoData } from "./";
+
+const FilmsData = () => {
   const filmsData: IFilm[] = [];
   const [pageIndex, setPageIndex] = useState(1);
   const { data, error, isLoading } = useSWR(
@@ -17,6 +17,8 @@ const Films = () => {
       fallbackData: filmsData,
     }
   );
+
+  console.log(data);
   const nextPage = () => {
     setPageIndex((d) => d + 1);
   };
@@ -27,7 +29,7 @@ const Films = () => {
   let content: React.JSX.Element;
   if (isLoading) {
     content = <LoadingSpinner />;
-  } else if (data) {
+  } else if (data && !Array.isArray(data)) {
     content = (
       <>
         <div className="flex flex-wrap gap-3 mt-20 container mx-auto">
@@ -92,4 +94,4 @@ const Films = () => {
   return <>{content}</>;
 };
 
-export default Films;
+export default FilmsData;
