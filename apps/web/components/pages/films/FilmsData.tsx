@@ -2,12 +2,13 @@
 import { useState } from "react";
 import useSWR from "swr";
 
+import { LoadingSpinner, NoData } from "@/components/common";
 import { fetcher, getStrapiUrl } from "@/utils/libs/api";
 import { IFilm } from "@/utils/types";
 
-import { FilmsList, LoadingSpinner, NoData } from "./";
+import { FilmsList } from "./";
 
-const FilmsData = () => {
+export const FilmsData = () => {
   const filmsData: IFilm[] = [];
   const [pageIndex, setPageIndex] = useState(1);
   const { data, error, isLoading } = useSWR(
@@ -93,5 +94,3 @@ const FilmsData = () => {
 
   return <>{content}</>;
 };
-
-export default FilmsData;

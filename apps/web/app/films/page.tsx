@@ -1,15 +1,12 @@
 import { Metadata, NextPage } from "next";
-import dynamic from "next/dynamic";
+
+import { FilmsData } from "@/components/pages/films";
 
 export const metadata: Metadata = {
   title: "My next films playlist",
 };
-const DymanicFIlmsData = dynamic(
-  () => import("@/components/FilmsData").then((mod) => mod),
-  {}
-);
 const FilmsPage: NextPage = () => {
-  return <DymanicFIlmsData />;
+  return <FilmsData />;
 };
 
 export default FilmsPage;

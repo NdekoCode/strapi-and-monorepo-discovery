@@ -157,9 +157,9 @@ export const Navbar = () => {
                     </svg>
                     Downloads
                   </a>
-                  <a
+                  <Link
                     className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                    href="#"
+                    href="/auth/login"
                   >
                     <svg
                       className="flex-shrink-0 w-4 h-4"
@@ -179,7 +179,7 @@ export const Navbar = () => {
                       <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>
                     Team Account
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ export const Navbar = () => {
 
           <Link
             className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 sm:my-6 sm:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
-            href="#"
+            href="/auth/login"
           >
             <svg
               className="flex-shrink-0 w-4 h-4"

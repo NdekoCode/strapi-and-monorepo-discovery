@@ -4,8 +4,8 @@ import "./globals.scss";
 import { Inter } from "next/font/google";
 import { PropsWithChildren } from "react";
 
-import { Header } from "@/components";
-import PrelineScript from "@/components/PrelineScript";
+import PrelineScript from "@/components/common/PrelineScript";
+import { Header } from "@/components/layouts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   children,
 }: Readonly<PropsWithChildren<{}>>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} bg-gradient-to-r from-pink-300 via-purle-300 to-indigo-300`}
       >
