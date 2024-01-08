@@ -4,6 +4,7 @@ import "./globals.scss";
 import { Inter } from "next/font/google";
 import { PropsWithChildren } from "react";
 
+import AppInit from "@/components/app/AppInit";
 import PrelineScript from "@/components/common/PrelineScript";
 import { Header } from "@/components/layouts";
 
@@ -22,9 +23,11 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-gradient-to-r from-pink-300 via-purle-300 to-indigo-300`}
       >
-        <Header />
-        {children}
-        <PrelineScript />
+        <AppInit>
+          <Header />
+          {children}
+          <PrelineScript />
+        </AppInit>
       </body>
     </html>
   );

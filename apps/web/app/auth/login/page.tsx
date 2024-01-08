@@ -1,15 +1,21 @@
 "use client";
 
+import * as Cookies from "cookies-next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
+import { Spinner } from "@/components/common";
 import { getStrapiUrl } from "@/utils/libs/api";
+import { setToken } from "@/utils/libs/auth";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     identifier: "",
     password: "",
   });
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
     const name = target.name;
@@ -18,16 +24,32 @@ const LoginPage = () => {
   };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch(getStrapiUrl("/auth/local"), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // body: JSON.stringify(formData),
-    });
-    console.log(res);
-    const data = await res.json();
-    console.log(data);
+    setIsLoading(true);
+    try {
+      const res = await fetch(getStrapiUrl("/auth/local"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        setIsLoading(false);
+        setToken(data);
+        router.push("/");
+        if (Cookies.getCookie("username")) {
+          router.push("/");
+        }
+        localStorage.setItem("user_token", JSON.stringify(data));
+      } else {
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error((error as Error).message);
+      setIsLoading(false);
+    }
   };
   return (
     <main className="w-full max-w-md mx-auto p-6">
@@ -119,7 +141,7 @@ const LoginPage = () => {
                   type="submit"
                   className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                 >
-                  Sign in
+                  {isLoading ? <Spinner viewText={true} /> : "Sign in"}
                 </button>
               </div>
             </form>
